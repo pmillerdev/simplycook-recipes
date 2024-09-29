@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { RecipeCardProps } from "./types";
+import styles from "./styles.module.css";
+import { useSpring, animated } from "@react-spring/web";
 
 const RecipeCard = ({
   id,
@@ -12,23 +14,45 @@ const RecipeCard = ({
   chilli,
 }: RecipeCardProps) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+
+  const cardStyles = useSpring({
+    cursor: "pointer",
+    width: "274px",
+    height: "282px",
+    borderRadius: "5px",
+    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+  });
+
   return (
-    <article id={id} onClick={() => setIsFlipped(!isFlipped)}>
+    <animated.article
+      id={id}
+      style={cardStyles}
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
       {isFlipped ? (
-        <>
-          <p>Cooking Time: {cookingTime} mins</p>
-          <p>Average Rating: {averageRating}</p>
-          <p>Top Review: "{topReview}"</p>
-          <p>Chilli Heat Level: {chilli}</p>
-        </>
+        <div className={styles.backOfCard}>
+          <p>Cooking time: {cookingTime} mins</p>
+          <p>Average rating: {averageRating}</p>
+          <p>"{topReview}"</p>
+          <p>Chilli heat level: {chilli}</p>
+        </div>
       ) : (
         <>
-          <img src={image} alt={name} />
+          <picture>
+            <source srcSet={image} type="image/png" />
+            <source srcSet={image} type="image/jpeg" />
+            <img
+              className={styles.cardImage}
+              src={image}
+              alt={name}
+              loading="lazy"
+            />
+          </picture>
           <h2>{name}</h2>
           <p>{shortDescription}</p>
         </>
       )}
-    </article>
+    </animated.article>
   );
 };
 
