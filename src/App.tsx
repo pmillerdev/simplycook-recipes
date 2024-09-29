@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import RecipeCard from "./components/RecipeCard";
 import useRecipes from "./hooks/useRecipes";
 import { RecipeCardProps } from "./components/RecipeCard/types";
+import "./styles.css";
+import CardCarousel from "./components/CardCarousel";
 
 const App = () => {
   const [recipesToDisplay, setRecipesToDisplay] = useState<RecipeCardProps[]>(
@@ -10,7 +12,7 @@ const App = () => {
   const { recipes, isLoading, isError } = useRecipes();
 
   useEffect(() => {
-    if (!isLoading && recipes && recipes?.length > 0) {
+    if (!isLoading && !isError && recipes && recipes?.length > 0) {
       const filteredRecipes = recipes.reduce(
         (recipesWithAllergens: RecipeCardProps[], recipe) => {
           // Check if recipe contains any of the allergens
@@ -37,21 +39,19 @@ const App = () => {
       );
       setRecipesToDisplay(filteredRecipes);
     }
-  }, [recipes, isLoading]);
+  }, [recipes, isLoading, isError]);
 
   console.log(recipesToDisplay);
 
   return (
-    <>
+    <main>
       <h1>Recipes</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        recipesToDisplay.map((recipe) => (
-          <RecipeCard key={recipe.id} {...recipe} />
-        ))
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>Error loading Recipes.</p>}
+      {!isLoading && !isError && recipesToDisplay?.length > 0 && (
+        <CardCarousel cards={recipesToDisplay} />
       )}
-    </>
+    </main>
   );
 };
 

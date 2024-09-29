@@ -15,6 +15,8 @@ const RecipeCard = ({
 }: RecipeCardProps) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
+  const handleCardClick = () => setIsFlipped(!isFlipped);
+
   const cardStyles = useSpring({
     cursor: "pointer",
     width: "274px",
@@ -24,16 +26,12 @@ const RecipeCard = ({
   });
 
   return (
-    <animated.article
-      id={id}
-      style={cardStyles}
-      onClick={() => setIsFlipped(!isFlipped)}
-    >
+    <animated.article id={id} style={cardStyles} onClick={handleCardClick}>
       {isFlipped ? (
         <div className={styles.backOfCard}>
           <p>Cooking time: {cookingTime} mins</p>
-          <p>Average rating: {averageRating}</p>
-          <p>"{topReview}"</p>
+          {averageRating && <p>Average rating: {averageRating}</p>}
+          {topReview && <p>"{topReview}"</p>}
           <p>Chilli heat level: {chilli}</p>
         </div>
       ) : (

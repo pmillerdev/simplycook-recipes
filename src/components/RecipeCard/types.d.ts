@@ -6,8 +6,8 @@ type RecipeCardProps = {
   shortDescription: string;
   image: string;
   cookingTime: string;
-  averageRating: string;
-  topReview: string;
+  averageRating?: string;
+  topReview?: string;
   chilli: ChilliHeatLevel;
 };
 
