@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { apiPath, fetcher } from "../../api";
+import { apiPath, fetcher } from "../../utils/api";
 import { RawRecipes, UseRecipes } from "./types";
 
 function useRecipes(): UseRecipes {

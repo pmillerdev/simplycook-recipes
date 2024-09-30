@@ -16,7 +16,7 @@ const App = () => {
       const filteredRecipes = filterAndFormatRecipes(recipes);
       setRecipeCards(filteredRecipes);
     }
-  }, [recipes, isLoading, error]);
+  }, [isLoading, error, recipes]);
 
   const filterAndFormatRecipes = (rawRecipes: RawRecipes) =>
     rawRecipes.reduce(
@@ -27,7 +27,7 @@ const App = () => {
           recipe.allergens?.includes("Fish") ||
           recipe.allergens?.includes("Eggs")
         ) {
-          // extract only the required properties from each recipe
+          // extract only the required properties from each recipe and push to array
           recipesWithAllergens.push({
             id: recipe.id,
             name: recipe.name,

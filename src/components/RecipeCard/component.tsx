@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RecipeCardProps } from "./types";
 import styles from "./styles.module.css";
 import { useSpring, animated } from "@react-spring/web";
-import { cardHeight, cardWidth } from "../../constants";
+import { cardHeight, cardWidth } from "../../utils/constants";
 
 const RecipeCard = ({
   id,
@@ -27,7 +27,12 @@ const RecipeCard = ({
   });
 
   return (
-    <animated.article id={id} style={cardStyles} onClick={handleCardClick}>
+    <animated.article
+      id={id}
+      data-testid={id}
+      style={cardStyles}
+      onClick={handleCardClick}
+    >
       {isFlipped ? (
         <div className={styles.backOfCard}>
           <p>Cooking time: {cookingTime} mins</p>

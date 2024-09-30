@@ -3,12 +3,12 @@ import RecipeCard from "../RecipeCard";
 import useWindowSize from "../../hooks/useWindowSize";
 import { CardCarouselProps, RenderCardProps } from "./types";
 import { useMemo } from "react";
-import { cardHeight, cardWidth } from "../../constants";
+import { cardHeight, cardWidth } from "../../utils/constants";
 
 const CardCarousel = ({ cards }: CardCarouselProps) => {
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
 
-  // assumed any device less than 480px in width is a mobile
+  // assume less than 480px width is a mobile
   const mobileView = useMemo(() => width < 480, [width]);
 
   const renderCard = ({ index, style }: RenderCardProps) => (
@@ -19,11 +19,12 @@ const CardCarousel = ({ cards }: CardCarouselProps) => {
 
   return (
     <VirtualizedList
-      layout={mobileView ? "vertical" : "horizontal"}
+      layout="horizontal"
       itemCount={cards.length}
       itemSize={cardHeight}
-      height={mobileView ? height : cardHeight + 20} // need additional height to account for scrollbar
-      width={mobileView ? "100%" : cardWidth * 3} // horizontally show one item on mobile otherwise show three items
+      height={cardHeight + 50} // need additional height to account for scrolling
+      width={mobileView ? cardWidth + 30 : cardWidth * 3} // display one item on mobile otherwise display three items
+      overscanCount={1} // render only the next card in the list before its visible
     >
       {renderCard}
     </VirtualizedList>
