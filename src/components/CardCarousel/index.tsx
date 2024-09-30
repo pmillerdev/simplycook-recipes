@@ -1,3 +1,1 @@
-import CardCarousel from "./component";
-
-export default CardCarousel;
+export { default } from "./component";

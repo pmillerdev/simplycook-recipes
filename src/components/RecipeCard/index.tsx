@@ -1,3 +1,1 @@
-import RecipeCard from "./component";
-
-export default RecipeCard;
+export { default } from "./component";

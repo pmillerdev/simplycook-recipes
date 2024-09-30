@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RecipeCardProps } from "./types";
 import styles from "./styles.module.css";
 import { useSpring, animated } from "@react-spring/web";
+import { cardHeight, cardWidth } from "../../constants";
 
 const RecipeCard = ({
   id,
@@ -19,8 +20,8 @@ const RecipeCard = ({
 
   const cardStyles = useSpring({
     cursor: "pointer",
-    width: "274px",
-    height: "282px",
+    width: `${cardWidth}px`,
+    height: `${cardHeight}px`,
     borderRadius: "5px",
     transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
   });
@@ -37,7 +38,6 @@ const RecipeCard = ({
       ) : (
         <>
           <picture>
-            <source srcSet={image} type="image/png" />
             <source srcSet={image} type="image/jpeg" />
             <img
               className={styles.cardImage}

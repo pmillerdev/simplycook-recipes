@@ -1,23 +1,18 @@
 import useSWR from "swr";
-import { apiPath, fetcher } from "./utils";
-
-type UseRecipes = {
-  recipes: any;
-  isLoading: boolean;
-  isError: boolean;
-};
+import { apiPath, fetcher } from "../../api";
+import { RawRecipes, UseRecipes } from "./types";
 
 function useRecipes(): UseRecipes {
   const {
     data: recipes,
-    error: isError,
+    error,
     isLoading,
   } = useSWR(`${apiPath}/recipes`, fetcher);
 
   return {
-    recipes,
+    recipes: recipes as RawRecipes,
     isLoading,
-    isError,
+    error,
   };
 }
 
