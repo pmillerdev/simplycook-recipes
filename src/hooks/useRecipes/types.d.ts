@@ -1,6 +1,6 @@
 type RecipeObject = {
   // eslint-disable-next-line
-  [key: string]: any; // usually wouldnt use any but have no knowledge of the recipes data structure
+  [key: string]: any; // usually wouldnt use any but have no knowledge of the recipe data structure
 };
 
 type RawRecipes = RecipeObject[];

@@ -27,7 +27,7 @@ const App = () => {
           recipe.allergens?.includes("Fish") ||
           recipe.allergens?.includes("Eggs")
         ) {
-          // extract only the required properties from each recipe and push to array
+          // extract only the required properties from each recipe and push to the result array
           recipesWithAllergens.push({
             id: recipe.id,
             name: recipe.name,
