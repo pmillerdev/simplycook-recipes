@@ -13,8 +13,8 @@ const testRecipeCards: RecipeCardProps[] = [
     shortDescription: "Recipe description...",
     image: testImageSrc,
     cookingTime: "20",
-    averageRating: "4.4",
-    topReview: "It was amazing!",
+    averageRating: null,
+    topReview: null,
     chilli: 0,
   },
   {
@@ -23,7 +23,8 @@ const testRecipeCards: RecipeCardProps[] = [
     shortDescription: "Recipe description...",
     image: testImageSrc,
     cookingTime: "15",
-    averageRating: "3.5",
+    averageRating: "4.4",
+    topReview: null,
     chilli: 1,
   },
   {
